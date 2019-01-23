@@ -4,7 +4,7 @@ lazy val akkaVersion = "2.5.19"
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
-      version := "1.0",
+      version := "1.0.0",
       organization := "com.gmail.namavirs86",
       scalaVersion := "2.12.8"
     )),
