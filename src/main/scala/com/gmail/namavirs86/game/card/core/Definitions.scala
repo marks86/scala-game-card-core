@@ -1,10 +1,10 @@
-package com.gmail.namavirs86.game.core
+package com.gmail.namavirs86.game.card.core
 
 import akka.actor.Props
-import com.gmail.namavirs86.game.core.Definitions.Outcome.Outcome
-import com.gmail.namavirs86.game.core.Definitions.Rank.Rank
-import com.gmail.namavirs86.game.core.Definitions.RequestType.RequestType
-import com.gmail.namavirs86.game.core.Definitions.Suit.Suit
+import Definitions.Outcome.Outcome
+import Definitions.Rank.Rank
+import Definitions.RequestType.RequestType
+import Definitions.Suit.Suit
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random

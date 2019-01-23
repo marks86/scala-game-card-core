@@ -1,7 +1,7 @@
-package com.gmail.namavirs86.game.core.helpers
+package com.gmail.namavirs86.game.card.core.helpers
 
-import com.gmail.namavirs86.game.core.Definitions._
-import com.gmail.namavirs86.game.core.random.RandomCheating
+import com.gmail.namavirs86.game.card.core.Definitions._
+import com.gmail.namavirs86.game.card.core.random.RandomCheating
 
 import scala.collection.mutable.ListBuffer
 

@@ -1,6 +1,6 @@
-package com.gmail.namavirs86.game.core
+package com.gmail.namavirs86.game.card.core
 
-import com.gmail.namavirs86.game.core.Definitions._
+import com.gmail.namavirs86.game.card.core.Definitions._
 
 import scala.util.Random
 

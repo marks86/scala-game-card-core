@@ -1,4 +1,4 @@
-package com.gmail.namavirs86.game.core
+package com.gmail.namavirs86.game.card.core
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import Game.{RequestPlay, ResponsePlay}

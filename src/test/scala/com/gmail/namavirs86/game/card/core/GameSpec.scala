@@ -1,11 +1,11 @@
-package com.gmail.namavirs86.game.core
+package com.gmail.namavirs86.game.card.core
 
 import akka.actor.ActorSystem
 import akka.testkit.{TestKit, TestProbe}
-import com.gmail.namavirs86.game.core.Definitions._
-import com.gmail.namavirs86.game.core.Game.ResponsePlay
-import com.gmail.namavirs86.game.core.helpers.{Helpers, TestAction, TestBehavior, TestResponseAdapter}
 import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpecLike}
+import com.gmail.namavirs86.game.card.core.Definitions.{GameConfig, GamePlayResponse, RequestType}
+import com.gmail.namavirs86.game.card.core.Game.ResponsePlay
+import com.gmail.namavirs86.game.card.core.helpers.{Helpers, TestAction, TestBehavior, TestResponseAdapter}
 
 class GameSpec(_system: ActorSystem)
   extends TestKit(_system)

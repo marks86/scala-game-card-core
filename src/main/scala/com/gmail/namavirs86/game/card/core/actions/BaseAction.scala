@@ -1,8 +1,8 @@
-package com.gmail.namavirs86.game.core.actions
+package com.gmail.namavirs86.game.card.core.actions
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import com.gmail.namavirs86.game.core.Definitions.Flow
-import com.gmail.namavirs86.game.core.actions.BaseAction.{RequestActionProcess, ResponseActionProcess}
+import com.gmail.namavirs86.game.card.core.Definitions.Flow
+import BaseAction.{RequestActionProcess, ResponseActionProcess}
 
 trait BaseActionMessages {
 

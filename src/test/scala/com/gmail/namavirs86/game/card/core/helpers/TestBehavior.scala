@@ -1,8 +1,8 @@
-package com.gmail.namavirs86.game.core.helpers
+package com.gmail.namavirs86.game.card.core.helpers
 
 import akka.actor.Props
-import com.gmail.namavirs86.game.core.{Behavior, BehaviorMessages}
-import com.gmail.namavirs86.game.core.Definitions.Flow
+import com.gmail.namavirs86.game.card.core.{Behavior, BehaviorMessages}
+import com.gmail.namavirs86.game.card.core.Definitions.Flow
 
 object TestBehavior extends BehaviorMessages {
   def props: Props = Props(new TestBehavior())

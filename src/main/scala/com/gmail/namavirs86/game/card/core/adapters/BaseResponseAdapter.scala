@@ -1,8 +1,8 @@
-package com.gmail.namavirs86.game.core.adapters
+package com.gmail.namavirs86.game.card.core.adapters
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import com.gmail.namavirs86.game.core.Definitions.{Flow, GamePlayResponse}
-import com.gmail.namavirs86.game.core.adapters.BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
+import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GamePlayResponse}
+import BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
 
 trait BaseResponseAdapterMessages {
 

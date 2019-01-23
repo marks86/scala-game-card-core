@@ -1,12 +1,11 @@
-package com.gmail.namavirs86.game.core
-
-import com.gmail.namavirs86.game.core.Definitions.{Card, Rank, ShoeManagerSettings, Suit}
-import com.gmail.namavirs86.game.core.helpers.Helpers
-import com.gmail.namavirs86.game.core.random.RandomCheating
-import org.scalatest.{Matchers, WordSpecLike}
+package com.gmail.namavirs86.game.card.core
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
+import org.scalatest.{Matchers, WordSpecLike}
+import com.gmail.namavirs86.game.card.core.Definitions._
+import com.gmail.namavirs86.game.card.core.helpers.Helpers
+import com.gmail.namavirs86.game.card.core.random.RandomCheating
 
 class ShoeManagerSpec extends WordSpecLike with Matchers {
 
