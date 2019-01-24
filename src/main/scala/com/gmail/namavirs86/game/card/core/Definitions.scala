@@ -33,6 +33,7 @@ object Definitions {
 
   case class RequestContext(
                              request: RequestType,
+                             gameId: String,
                              requestId: Long,
                              var action: ActionType,
                              bet: Option[Float],
