@@ -10,6 +10,7 @@ object Helpers {
   def createFlow(cheat: ListBuffer[Int] = ListBuffer[Int]()): Flow = {
     Flow(
       RequestContext(
+        request = RequestType.PLAY,
         requestId = 0,
         action = ActionType.DEAL,
         bet = Some(1f)),

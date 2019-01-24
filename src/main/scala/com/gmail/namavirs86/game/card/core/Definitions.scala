@@ -5,6 +5,7 @@ import Definitions.Outcome.Outcome
 import Definitions.Rank.Rank
 import Definitions.ActionType.ActionType
 import Definitions.Suit.Suit
+import com.gmail.namavirs86.game.card.core.Definitions.RequestType.RequestType
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -18,7 +19,20 @@ object Definitions {
                          behavior: Props,
                        )
 
+  object RequestType {
+
+    sealed abstract class RequestType
+
+    case object INIT extends RequestType
+
+    case object PLAY extends RequestType
+
+    val requestTypes = List(INIT, PLAY)
+
+  }
+
   case class RequestContext(
+                             request: RequestType,
                              requestId: Long,
                              var action: ActionType,
                              bet: Option[Float],
