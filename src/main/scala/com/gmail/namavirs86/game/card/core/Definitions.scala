@@ -21,7 +21,7 @@ object Definitions {
   case class RequestContext(
                              requestId: Long,
                              var action: ActionType,
-                             bet: Float,
+                             bet: Option[Float],
                            )
 
   type Hand = ListBuffer[Card]
@@ -48,7 +48,7 @@ object Definitions {
                           player: PlayerContext,
                           var shoe: List[Card],
                           var outcome: Option[Outcome],
-                          var bet: Float,
+                          var bet: Option[Float],
                           var totalWin: Float,
                           var roundEnded: Boolean,
                         )

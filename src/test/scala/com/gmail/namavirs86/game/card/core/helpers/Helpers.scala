@@ -12,7 +12,7 @@ object Helpers {
       RequestContext(
         requestId = 0,
         action = ActionType.DEAL,
-        bet = 1f),
+        bet = Some(1f)),
       GameContext(
         dealer = DealerContext(
           hand = ListBuffer[Card](),
@@ -26,7 +26,7 @@ object Helpers {
           hasBJ = false,
         ),
         shoe = List(),
-        bet = 0,
+        bet = None,
         totalWin = 0f,
         outcome = None,
         roundEnded = true,
