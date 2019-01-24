@@ -3,7 +3,6 @@ package com.gmail.namavirs86.game.card.core
 import akka.actor.Props
 import Definitions.Outcome.Outcome
 import Definitions.Rank.Rank
-import Definitions.ActionType.ActionType
 import Definitions.Suit.Suit
 import com.gmail.namavirs86.game.card.core.Definitions.RequestType.RequestType
 
@@ -92,21 +91,7 @@ object Definitions {
 
   }
 
-  object ActionType {
-
-    sealed abstract class ActionType
-
-    case object DEAL extends ActionType
-
-    case object HIT extends ActionType
-
-    case object STAND extends ActionType
-
-    case object DOUBLE extends ActionType
-
-    case object SPLIT extends ActionType
-
-  }
+  type ActionType = String
 
   object Suit {
 

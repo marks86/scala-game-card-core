@@ -3,9 +3,10 @@ package com.gmail.namavirs86.game.card.core
 import akka.actor.ActorSystem
 import akka.testkit.{TestKit, TestProbe}
 import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpecLike}
-import com.gmail.namavirs86.game.card.core.Definitions.{GameConfig, GamePlayResponse, ActionType}
+import com.gmail.namavirs86.game.card.core.Definitions.{GameConfig, GamePlayResponse}
 import com.gmail.namavirs86.game.card.core.Game.ResponsePlay
-import com.gmail.namavirs86.game.card.core.helpers.{Helpers, TestAction, TestBehavior, TestResponseAdapter}
+import com.gmail.namavirs86.game.card.core.helpers.Helpers.TestActionType
+import com.gmail.namavirs86.game.card.core.helpers._
 
 class GameSpec(_system: ActorSystem)
   extends TestKit(_system)
@@ -18,7 +19,7 @@ class GameSpec(_system: ActorSystem)
 
   val config = GameConfig(
     id = "bj",
-    actions = Map(ActionType.DEAL → TestAction.props(1)),
+    actions = Map(TestActionType.DEAL → TestAction.props(1)),
     responseAdapter = TestResponseAdapter.props,
     behavior = TestBehavior.props
   )
@@ -38,7 +39,7 @@ class GameSpec(_system: ActorSystem)
       val response = probe.expectMsgType[ResponsePlay]
       val requestContext = response.flow.requestContext
       requestContext.requestId shouldBe 0
-      requestContext.action shouldBe ActionType.DEAL
+      requestContext.action shouldBe TestActionType.DEAL
       response.flow.response shouldBe Some(GamePlayResponse())
     }
   }

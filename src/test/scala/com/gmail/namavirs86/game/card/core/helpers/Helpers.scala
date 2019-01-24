@@ -7,13 +7,22 @@ import scala.collection.mutable.ListBuffer
 
 object Helpers {
 
+  object TestActionType {
+
+    val DEAL: ActionType = "DEAL"
+
+    val HIT: ActionType = "HIT"
+
+    val STAND: ActionType = "STAND"
+  }
+
   def createFlow(cheat: ListBuffer[Int] = ListBuffer[Int]()): Flow = {
     Flow(
       RequestContext(
         request = RequestType.PLAY,
         gameId = "bj",
         requestId = 0,
-        action = ActionType.DEAL,
+        action = TestActionType.DEAL,
         bet = Some(1f)),
       GameContext(
         dealer = DealerContext(

@@ -4,8 +4,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import Game.{RequestPlay, ResponsePlay}
 import actions.BaseAction.{RequestActionProcess, ResponseActionProcess}
 import adapters.BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
-import Definitions.ActionType.ActionType
-import Definitions.{Flow, GameConfig, GamePlayResponse}
+import Definitions.{ActionType, Flow, GameConfig, GamePlayResponse}
 
 object Game {
 
