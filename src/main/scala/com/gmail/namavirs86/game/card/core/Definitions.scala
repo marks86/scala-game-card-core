@@ -3,7 +3,7 @@ package com.gmail.namavirs86.game.card.core
 import akka.actor.Props
 import Definitions.Outcome.Outcome
 import Definitions.Rank.Rank
-import Definitions.RequestType.ActionType
+import Definitions.ActionType.ActionType
 import Definitions.Suit.Suit
 
 import scala.collection.mutable.ListBuffer
@@ -77,7 +77,7 @@ object Definitions {
 
   }
 
-  object RequestType {
+  object ActionType {
 
     sealed abstract class ActionType
 
