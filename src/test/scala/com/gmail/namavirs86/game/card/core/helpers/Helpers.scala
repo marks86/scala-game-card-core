@@ -11,7 +11,7 @@ object Helpers {
     Flow(
       RequestContext(
         requestId = 0,
-        requestType = ActionType.DEAL,
+        action = ActionType.DEAL,
         bet = 1f),
       GameContext(
         dealer = DealerContext(

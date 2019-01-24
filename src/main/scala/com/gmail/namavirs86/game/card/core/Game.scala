@@ -46,7 +46,7 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
   }
 
   protected def requestPlay(flow: Flow): Unit = {
-    val requestType = flow.requestContext.requestType
+    val requestType = flow.requestContext.action
     actions.get(requestType) match {
       case Some(ref) ⇒
         ref ! RequestActionProcess(sender, flow)

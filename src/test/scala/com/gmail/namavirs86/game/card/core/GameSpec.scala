@@ -38,7 +38,7 @@ class GameSpec(_system: ActorSystem)
       val response = probe.expectMsgType[ResponsePlay]
       val requestContext = response.flow.requestContext
       requestContext.requestId shouldBe 0
-      requestContext.requestType shouldBe ActionType.DEAL
+      requestContext.action shouldBe ActionType.DEAL
       response.flow.response shouldBe Some(GamePlayResponse())
     }
   }

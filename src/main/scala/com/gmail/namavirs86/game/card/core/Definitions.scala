@@ -20,7 +20,7 @@ object Definitions {
 
   case class RequestContext(
                              requestId: Long,
-                             var requestType: ActionType,
+                             var action: ActionType,
                              bet: Float,
                            )
 
