@@ -3,7 +3,7 @@ package com.gmail.namavirs86.game.card.core
 import akka.actor.Props
 import Definitions.Outcome.Outcome
 import Definitions.Rank.Rank
-import Definitions.RequestType.RequestType
+import Definitions.RequestType.ActionType
 import Definitions.Suit.Suit
 
 import scala.collection.mutable.ListBuffer
@@ -13,14 +13,14 @@ object Definitions {
 
   case class GameConfig(
                          id: String,
-                         actions: Map[RequestType, Props],
+                         actions: Map[ActionType, Props],
                          responseAdapter: Props,
                          behavior: Props,
                        )
 
   case class RequestContext(
                              requestId: Long,
-                             var requestType: RequestType,
+                             var requestType: ActionType,
                              bet: Float,
                            )
 
@@ -79,17 +79,17 @@ object Definitions {
 
   object RequestType {
 
-    sealed abstract class RequestType
+    sealed abstract class ActionType
 
-    case object DEAL extends RequestType
+    case object DEAL extends ActionType
 
-    case object HIT extends RequestType
+    case object HIT extends ActionType
 
-    case object STAND extends RequestType
+    case object STAND extends ActionType
 
-    case object DOUBLE extends RequestType
+    case object DOUBLE extends ActionType
 
-    case object SPLIT extends RequestType
+    case object SPLIT extends ActionType
 
   }
 

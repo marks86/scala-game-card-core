@@ -4,7 +4,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import Game.{RequestPlay, ResponsePlay}
 import actions.BaseAction.{RequestActionProcess, ResponseActionProcess}
 import adapters.BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
-import Definitions.RequestType.RequestType
+import Definitions.RequestType.ActionType
 import Definitions.{Flow, GameConfig, GamePlayResponse}
 
 object Game {
@@ -20,7 +20,7 @@ object Game {
 // @TODO: request validation in each action
 class Game(config: GameConfig) extends Actor with ActorLogging {
 
-  protected var actions = Map.empty[RequestType, ActorRef]
+  protected var actions = Map.empty[ActionType, ActorRef]
   protected var responseAdapter: ActorRef = _
 
   override def preStart(): Unit = {
