@@ -30,9 +30,11 @@ object Definitions {
 
   }
 
+  type GameId = String
+
   case class RequestContext(
                              request: RequestType,
-                             gameId: String,
+                             gameId: GameId,
                              requestId: Long,
                              var action: ActionType,
                              bet: Option[Float],
