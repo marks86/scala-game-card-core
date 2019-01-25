@@ -24,8 +24,8 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
 
   override def preStart(): Unit = {
     config.actions.foreach {
-      case (requestType, props) ⇒
-        actions += requestType → context.actorOf(props)
+      case (actionType, props) ⇒
+        actions += actionType → context.actorOf(props)
     }
 
     responseAdapter = context.actorOf(
@@ -45,12 +45,12 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
   }
 
   protected def requestPlay(flow: Flow): Unit = {
-    val requestType = flow.requestContext.action
-    actions.get(requestType) match {
+    val actionType = flow.requestContext.action
+    actions.get(actionType) match {
       case Some(ref) ⇒
         ref ! RequestActionProcess(sender, flow)
       case None ⇒
-        log.info("Missing action for request type: {}", requestType)
+        log.info("No handler for action: {}", actionType)
     }
   }
 
