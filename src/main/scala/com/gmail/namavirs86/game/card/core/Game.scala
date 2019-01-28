@@ -38,10 +38,10 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
       requestPlay(flow)
 
     case ResponseActionProcess(playerRef: ActorRef, flow: Flow) ⇒
-      responseActionProcess(playerRef, flow)
+      responseAdapter ! RequestCreateResponse(playerRef, flow)
 
     case ResponseCreateResponse(playerRef: ActorRef, flow: Flow) ⇒
-      responseCreateResponse(playerRef, flow)
+      playerRef ! ResponsePlay(flow)
   }
 
   protected def requestPlay(flow: Flow): Unit = {
@@ -54,11 +54,4 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
     }
   }
 
-  protected def responseActionProcess(playerRef: ActorRef, flow: Flow): Unit = {
-    responseAdapter ! RequestCreateResponse(playerRef, flow)
-  }
-
-  protected def responseCreateResponse(playerRef: ActorRef, flow: Flow): Unit = {
-    playerRef ! ResponsePlay(flow)
-  }
 }

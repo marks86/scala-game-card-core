@@ -71,7 +71,7 @@ object Definitions {
 
   case class Flow(
                    requestContext: RequestContext,
-                   gameContext: Option[GameContext],
+                   var gameContext: Option[GameContext],
                    var response: Option[GamePlayResponse],
                    rng: Random,
                  )

@@ -47,41 +47,6 @@ object Helpers {
     )
   }
 
-  /*
-
-
-    def createFlow(cheat: ListBuffer[Int] = ListBuffer[Int]()): Flow = {
-    Flow(
-      RequestContext(
-        request = RequestType.PLAY,
-        gameId = "bj",
-        requestId = 0,
-        action = TestActionType.DEAL,
-        bet = Some(1f)),
-      GameContext(
-        dealer = DealerContext(
-          hand = ListBuffer[Card](),
-          value = 0,
-          holeCard = None,
-          hasBJ = false,
-        ),
-        player = PlayerContext(
-          hand = ListBuffer[Card](),
-          value = 0,
-          hasBJ = false,
-        ),
-        shoe = List(),
-        bet = None,
-        totalWin = 0f,
-        outcome = None,
-        roundEnded = true,
-      ),
-      response = None,
-      rng = new RandomCheating(cheat)
-    )
-  }
-   */
-
   val cardValues: CardValues = Map(
     Rank.TWO → 2,
     Rank.THREE → 3,
