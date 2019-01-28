@@ -44,7 +44,26 @@ object Definitions {
 
   type Shoe = List[Card]
 
-  case class GamePlayResponse()
+  case class ResponseDealerContext(
+                                    hand: Hand,
+                                    value: Int,
+                                    hasBJ: Boolean,
+                                  )
+
+  case class ResponsePlayerContext(
+                                    hand: Hand,
+                                    value: Int,
+                                    hasBJ: Boolean,
+                                  )
+
+  case class GamePlayResponse(
+                             dealer: ResponseDealerContext,
+                             player: ResponsePlayerContext,
+                             outcome: Option[Outcome],
+                             bet: Option[Float],
+                             totalWin: Float,
+                             roundEnded: Boolean,
+                             )
 
   case class PlayerContext(
                             hand: Hand,

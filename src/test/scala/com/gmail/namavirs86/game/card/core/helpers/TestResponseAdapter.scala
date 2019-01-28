@@ -12,6 +12,6 @@ class TestResponseAdapter extends BaseResponseAdapter {
   val id = "testResponseAdapter"
 
   def process(flow: Flow): Unit = {
-    flow.response = Some(GamePlayResponse())
+    flow.response = None
   }
 }

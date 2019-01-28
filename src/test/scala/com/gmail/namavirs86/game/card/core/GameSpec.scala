@@ -40,7 +40,7 @@ class GameSpec(_system: ActorSystem)
       val requestContext = response.flow.requestContext
       requestContext.requestId shouldBe 0
       requestContext.action shouldBe TestActionType.DEAL
-      response.flow.response shouldBe Some(GamePlayResponse())
+      response.flow.response shouldBe None
     }
   }
 }
