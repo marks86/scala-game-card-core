@@ -36,7 +36,7 @@ object Helpers {
           value = 0,
           hasBJ = false,
         ),
-        shoe = List(),
+        shoe = List.empty[Card],
         bet = None,
         totalWin = 0f,
         outcome = None,
