@@ -4,6 +4,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import Game.{RequestPlay, ResponsePlay}
 import actions.BaseAction.{RequestActionProcess, ResponseActionProcess}
 import adapters.BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
+import Behavior.{RequestBehaviorProcess, ResponseBehaviorProcess}
 import Definitions.{ActionType, Flow, GameConfig, GamePlayResponse}
 
 object Game {
@@ -20,6 +21,7 @@ object Game {
 class Game(config: GameConfig) extends Actor with ActorLogging {
 
   protected var actions = Map.empty[ActionType, ActorRef]
+  protected var behavior: ActorRef = _
   protected var responseAdapter: ActorRef = _
 
   override def preStart(): Unit = {
@@ -27,6 +29,10 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
       case (actionType, props) ⇒
         actions += actionType → context.actorOf(props)
     }
+
+    behavior = context.actorOf(
+      config.behavior
+    )
 
     responseAdapter = context.actorOf(
       config.responseAdapter
@@ -38,6 +44,9 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
       requestPlay(flow)
 
     case ResponseActionProcess(playerRef: ActorRef, flow: Flow) ⇒
+      behavior ! RequestBehaviorProcess(playerRef, flow)
+
+    case ResponseBehaviorProcess(playerRef: ActorRef, flow: Flow) ⇒
       responseAdapter ! RequestCreateResponse(playerRef, flow)
 
     case ResponseCreateResponse(playerRef: ActorRef, flow: Flow) ⇒

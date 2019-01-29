@@ -55,7 +55,6 @@ object Definitions {
                                     value: Int,
                                     hasBJ: Boolean,
                                   )
-
   case class GamePlayResponse(
                              dealer: ResponseDealerContext,
                              player: ResponsePlayerContext,
