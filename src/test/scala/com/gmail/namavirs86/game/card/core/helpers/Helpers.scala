@@ -26,13 +26,13 @@ object Helpers {
         bet = Some(1f)),
       gameContext = Some(GameContext(
         dealer = DealerContext(
-          hand = ListBuffer[Card](),
+          hand = List.empty[Card],
           value = 0,
           holeCard = None,
           hasBJ = false,
         ),
         player = PlayerContext(
-          hand = ListBuffer[Card](),
+          hand = List.empty[Card],
           value = 0,
           hasBJ = false,
         ),

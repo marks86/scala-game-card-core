@@ -40,7 +40,7 @@ object Definitions {
                              bet: Option[Float],
                            )
 
-  type Hand = ListBuffer[Card]
+  type Hand = List[Card]
 
   type Shoe = List[Card]
 
@@ -66,13 +66,13 @@ object Definitions {
                              )
 
   case class PlayerContext(
-                            hand: Hand,
+                            var hand: Hand,
                             var value: Int,
                             var hasBJ: Boolean,
                           )
 
   case class DealerContext(
-                            hand: Hand,
+                            var hand: Hand,
                             var value: Int,
                             var holeCard: Option[Card],
                             var hasBJ: Boolean,
