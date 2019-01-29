@@ -110,6 +110,7 @@ object Definitions {
 
     case object TIE extends Outcome
 
+    val outcomes = List(DEALER, PLAYER, TIE)
   }
 
   type ActionType = String
