@@ -18,32 +18,40 @@ object Helpers {
 
   def createFlow(cheat: ListBuffer[Int] = ListBuffer[Int]()): Flow = {
     Flow(
-      RequestContext(
-        request = RequestType.PLAY,
-        gameId = "bj",
-        requestId = 0,
-        action = TestActionType.DEAL,
-        bet = Some(1f)),
-      gameContext = Some(GameContext(
-        dealer = DealerContext(
-          hand = List.empty[Card],
-          value = 0,
-          holeCard = None,
-          hasBJ = false,
-        ),
-        player = PlayerContext(
-          hand = List.empty[Card],
-          value = 0,
-          hasBJ = false,
-        ),
-        shoe = List.empty[Card],
-        bet = None,
-        totalWin = 0f,
-        outcome = None,
-        roundEnded = true,
-      )),
+      requestContext = createRequestContext(),
+      gameContext = None,
       response = None,
       rng = new RandomCheating(cheat)
+    )
+  }
+
+  def createRequestContext(): RequestContext = {
+    RequestContext(
+      request = RequestType.PLAY,
+      gameId = "bj",
+      requestId = 0,
+      action = TestActionType.DEAL,
+      bet = Some(1f))
+  }
+
+  def createGameContext(): GameContext = {
+    GameContext(
+      dealer = DealerContext(
+        hand = List.empty[Card],
+        value = 0,
+        holeCard = None,
+        hasBJ = false,
+      ),
+      player = PlayerContext(
+        hand = List.empty[Card],
+        value = 0,
+        hasBJ = false,
+      ),
+      shoe = List.empty[Card],
+      bet = None,
+      totalWin = 0f,
+      outcome = None,
+      roundEnded = true,
     )
   }
 

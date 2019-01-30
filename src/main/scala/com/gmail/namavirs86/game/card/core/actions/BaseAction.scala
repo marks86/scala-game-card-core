@@ -1,7 +1,7 @@
 package com.gmail.namavirs86.game.card.core.actions
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import com.gmail.namavirs86.game.card.core.Definitions.Flow
+import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GameContext}
 import BaseAction.{RequestActionProcess, ResponseActionProcess}
 
 trait BaseActionMessages {
@@ -17,7 +17,7 @@ object BaseAction extends BaseActionMessages
 trait Action {
   val id: String
 
-  def process(flow: Flow): Unit
+  def process(flow: Flow): Option[GameContext]
 
   def validateRequest(flow: Flow): Unit
 }
@@ -28,8 +28,9 @@ abstract class BaseAction extends Actor with Action with ActorLogging {
   override def receive: Receive = {
     case RequestActionProcess(playerRef: ActorRef, flow: Flow) ⇒
       validateRequest(flow)
-      process(flow)
-      sender ! ResponseActionProcess(playerRef, flow)
+      sender ! ResponseActionProcess(playerRef, flow.copy(
+        gameContext = process(flow)
+      ))
 
     case _ => println("that was unexpected")
   }

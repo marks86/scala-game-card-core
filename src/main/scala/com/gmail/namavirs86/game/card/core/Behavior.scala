@@ -1,7 +1,7 @@
 package com.gmail.namavirs86.game.card.core
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import com.gmail.namavirs86.game.card.core.Definitions.Flow
+import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GameContext}
 import Behavior.{RequestBehaviorProcess, ResponseBehaviorProcess}
 
 trait BehaviorMessages {
@@ -19,11 +19,12 @@ abstract class Behavior extends Actor with ActorLogging {
 
   override def receive: Receive = {
     case RequestBehaviorProcess(playerRef: ActorRef, flow: Flow) ⇒
-      process(flow)
-      sender ! ResponseBehaviorProcess(playerRef, flow)
+      sender ! ResponseBehaviorProcess(playerRef, flow.copy(
+        gameContext = process(flow)
+      ))
 
     case _ => println("that was unexpected")
   }
 
-  def process(flow: Flow): Unit
+  def process(flow: Flow): Option[GameContext]
 }

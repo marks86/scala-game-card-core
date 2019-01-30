@@ -19,11 +19,12 @@ abstract class BaseResponseAdapter extends Actor with ActorLogging {
 
   override def receive: Receive = {
     case RequestCreateResponse(playerRef: ActorRef, flow: Flow) ⇒
-      process(flow)
-      sender ! ResponseCreateResponse(playerRef, flow)
+      sender ! ResponseCreateResponse(playerRef, flow.copy(
+        response = process(flow)
+      ))
 
     case _ => println("that was unexpected")
   }
 
-  def process(flow: Flow): Unit
+  def process(flow: Flow): Option[GamePlayResponse]
 }

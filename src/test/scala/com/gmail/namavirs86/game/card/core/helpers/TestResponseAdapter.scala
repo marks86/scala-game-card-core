@@ -11,7 +11,5 @@ object TestResponseAdapter extends BaseResponseAdapterMessages {
 class TestResponseAdapter extends BaseResponseAdapter {
   val id = "testResponseAdapter"
 
-  def process(flow: Flow): Unit = {
-    flow.response = None
-  }
+  def process(flow: Flow): Option[GamePlayResponse] = None
 }

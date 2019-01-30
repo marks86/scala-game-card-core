@@ -6,7 +6,6 @@ import Definitions.Rank.Rank
 import Definitions.Suit.Suit
 import com.gmail.namavirs86.game.card.core.Definitions.RequestType.RequestType
 
-import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 object Definitions {
@@ -65,16 +64,16 @@ object Definitions {
                              )
 
   case class PlayerContext(
-                            var hand: Hand,
-                            var value: Int,
-                            var hasBJ: Boolean,
+                            hand: Hand,
+                            value: Int,
+                            hasBJ: Boolean,
                           )
 
   case class DealerContext(
-                            var hand: Hand,
-                            var value: Int,
-                            var holeCard: Option[Card],
-                            var hasBJ: Boolean,
+                            hand: Hand,
+                            value: Int,
+                            holeCard: Option[Card],
+                            hasBJ: Boolean,
                           )
 
   case class GameContext(
@@ -89,7 +88,7 @@ object Definitions {
 
   case class Flow(
                    requestContext: RequestContext,
-                   var gameContext: Option[GameContext],
+                   gameContext: Option[GameContext],
                    var response: Option[GamePlayResponse],
                    rng: Random,
                  )
