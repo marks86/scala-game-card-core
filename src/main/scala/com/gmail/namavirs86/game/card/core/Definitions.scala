@@ -79,7 +79,7 @@ object Definitions {
   case class GameContext(
                           dealer: DealerContext,
                           player: PlayerContext,
-                          var shoe: List[Card],
+                          shoe: List[Card],
                           var outcome: Option[Outcome],
                           var bet: Option[Float],
                           var totalWin: Float,
