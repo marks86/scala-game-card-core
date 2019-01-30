@@ -80,16 +80,16 @@ object Definitions {
                           dealer: DealerContext,
                           player: PlayerContext,
                           shoe: List[Card],
-                          var outcome: Option[Outcome],
-                          var bet: Option[Float],
-                          var totalWin: Float,
-                          var roundEnded: Boolean,
+                          outcome: Option[Outcome],
+                          bet: Option[Float],
+                          totalWin: Float,
+                          roundEnded: Boolean,
                         )
 
   case class Flow(
                    requestContext: RequestContext,
                    gameContext: Option[GameContext],
-                   var response: Option[GamePlayResponse],
+                   response: Option[GamePlayResponse],
                    rng: Random,
                  )
 
