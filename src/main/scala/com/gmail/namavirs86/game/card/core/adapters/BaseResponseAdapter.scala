@@ -3,6 +3,7 @@ package com.gmail.namavirs86.game.card.core.adapters
 import akka.actor.{Actor, ActorLogging, ActorRef}
 import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GamePlayResponse}
 import BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
+import spray.json.JsValue
 
 trait BaseResponseAdapterMessages {
 
@@ -26,5 +27,5 @@ abstract class BaseResponseAdapter extends Actor with ActorLogging {
     case _ => println("that was unexpected")
   }
 
-  def process(flow: Flow): Option[GamePlayResponse]
+  def process(flow: Flow): Option[JsValue]
 }

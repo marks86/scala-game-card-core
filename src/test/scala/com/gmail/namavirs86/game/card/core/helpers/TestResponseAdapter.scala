@@ -3,6 +3,7 @@ package com.gmail.namavirs86.game.card.core.helpers
 import akka.actor.Props
 import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GamePlayResponse}
 import com.gmail.namavirs86.game.card.core.adapters.{BaseResponseAdapter, BaseResponseAdapterMessages}
+import spray.json.{JsString, JsValue}
 
 object TestResponseAdapter extends BaseResponseAdapterMessages {
   def props: Props = Props(new TestResponseAdapter())
@@ -11,5 +12,5 @@ object TestResponseAdapter extends BaseResponseAdapterMessages {
 class TestResponseAdapter extends BaseResponseAdapter {
   val id = "testResponseAdapter"
 
-  def process(flow: Flow): Option[GamePlayResponse] = None
+  def process(flow: Flow): Option[JsValue] = None
 }

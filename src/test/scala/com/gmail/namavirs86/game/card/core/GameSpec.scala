@@ -7,6 +7,7 @@ import com.gmail.namavirs86.game.card.core.Definitions.{GameConfig, GamePlayResp
 import com.gmail.namavirs86.game.card.core.Game.ResponsePlay
 import com.gmail.namavirs86.game.card.core.helpers.Helpers.TestActionType
 import com.gmail.namavirs86.game.card.core.helpers._
+import spray.json.JsString
 
 class GameSpec(_system: ActorSystem)
   extends TestKit(_system)

@@ -8,6 +8,8 @@ import com.gmail.namavirs86.game.card.core.Definitions.RequestType.RequestType
 
 import scala.util.Random
 
+import spray.json.JsValue
+
 object Definitions {
 
   case class GameConfig(
@@ -89,7 +91,7 @@ object Definitions {
   case class Flow(
                    requestContext: RequestContext,
                    gameContext: Option[GameContext],
-                   response: Option[GamePlayResponse],
+                   response: Option[JsValue],
                    rng: Random,
                  )
 
