@@ -35,7 +35,7 @@ object Definitions {
                              request: RequestType,
                              gameId: GameId,
                              requestId: Long,
-                             var action: ActionType,
+                             action: ActionType,
                              bet: Option[Float],
                            )
 
