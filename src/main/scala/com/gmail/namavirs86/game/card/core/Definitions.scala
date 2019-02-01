@@ -12,7 +12,7 @@ import spray.json.JsValue
 
 object Definitions {
 
-  case class GameConfig(
+  final case class GameConfig(
                          id: String,
                          actions: Map[ActionType, Props],
                          responseAdapter: Props,
@@ -33,7 +33,7 @@ object Definitions {
 
   type GameId = String
 
-  case class RequestContext(
+  final case class RequestContext(
                              request: RequestType,
                              gameId: GameId,
                              requestId: Long,
@@ -45,18 +45,18 @@ object Definitions {
 
   type Shoe = List[Card]
 
-  case class ResponseDealerContext(
+  final case class ResponseDealerContext(
                                     hand: Hand,
                                     value: Int,
                                     hasBJ: Boolean,
                                   )
 
-  case class ResponsePlayerContext(
+  final case class ResponsePlayerContext(
                                     hand: Hand,
                                     value: Int,
                                     hasBJ: Boolean,
                                   )
-  case class GamePlayResponse(
+  final case class GamePlayResponse(
                              dealer: ResponseDealerContext,
                              player: ResponsePlayerContext,
                              outcome: Option[Outcome],
@@ -65,20 +65,20 @@ object Definitions {
                              roundEnded: Boolean,
                              )
 
-  case class PlayerContext(
+  final case class PlayerContext(
                             hand: Hand,
                             value: Int,
                             hasBJ: Boolean,
                           )
 
-  case class DealerContext(
+  final case class DealerContext(
                             hand: Hand,
                             value: Int,
                             holeCard: Option[Card],
                             hasBJ: Boolean,
                           )
 
-  case class GameContext(
+  final case class GameContext(
                           dealer: DealerContext,
                           player: PlayerContext,
                           shoe: List[Card],
@@ -88,14 +88,14 @@ object Definitions {
                           roundEnded: Boolean,
                         )
 
-  case class Flow(
+  final case class Flow(
                    requestContext: RequestContext,
                    gameContext: Option[GameContext],
                    response: Option[JsValue],
                    rng: Random,
                  )
 
-  case class ShoeManagerSettings(
+  final case class ShoeManagerSettings(
                                   deckCount: Int,
                                   cutCardPosition: Int,
                                 )
@@ -163,7 +163,7 @@ object Definitions {
     val ranks = List(TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE)
   }
 
-  case class Card(rank: Rank, suit: Suit)
+  final case class Card(rank: Rank, suit: Suit)
 
   type CardValues = Map[Rank, Int]
 
