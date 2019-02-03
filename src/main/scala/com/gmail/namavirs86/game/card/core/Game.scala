@@ -16,6 +16,7 @@ object Game {
   final case class ResponsePlay(flow: Flow)
 
 }
+
 // @TODO: bet validation
 // @TODO: request validation in each action
 class Game(config: GameConfig) extends Actor with ActorLogging {
@@ -27,15 +28,15 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
   override def preStart(): Unit = {
     config.actions.foreach {
       case (actionType, props) ⇒
-        actions += actionType → context.actorOf(props)
+        actions += actionType → context.actorOf(props, actionType)
     }
 
     behavior = context.actorOf(
-      config.behavior
+      config.behavior, name = "behavior"
     )
 
     responseAdapter = context.actorOf(
-      config.responseAdapter
+      config.responseAdapter, name = "responseAdapter"
     )
   }
 
