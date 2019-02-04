@@ -49,7 +49,7 @@ object Helpers {
         hasBJ = false,
       ),
       shoe = List.empty[Card],
-      bet = None,
+      bet = Some(1f),
       totalWin = 0f,
       outcome = None,
       roundEnded = true,
