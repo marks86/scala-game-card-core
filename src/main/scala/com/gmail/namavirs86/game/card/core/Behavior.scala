@@ -2,6 +2,7 @@ package com.gmail.namavirs86.game.card.core
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
 import com.gmail.namavirs86.game.card.core.Definitions.{Flow, GameContext}
+import com.gmail.namavirs86.game.card.core.Exceptions.UnknownMessageException
 import Behavior.{RequestBehaviorProcess, ResponseBehaviorProcess}
 
 trait BehaviorMessages {
@@ -23,7 +24,7 @@ abstract class Behavior extends Actor with ActorLogging {
         gameContext = process(flow)
       ))
 
-    case _ => println("that was unexpected")
+    case _ => throw UnknownMessageException()
   }
 
   def process(flow: Flow): Option[GameContext]

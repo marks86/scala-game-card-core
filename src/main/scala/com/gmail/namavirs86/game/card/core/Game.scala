@@ -5,7 +5,8 @@ import Game.{RequestPlay, ResponsePlay}
 import actions.BaseAction.{RequestActionProcess, ResponseActionProcess}
 import adapters.BaseResponseAdapter.{RequestCreateResponse, ResponseCreateResponse}
 import Behavior.{RequestBehaviorProcess, ResponseBehaviorProcess}
-import Definitions.{ActionType, Flow, GameConfig, GamePlayResponse}
+import Definitions.{ActionType, Flow, GameConfig}
+import Exceptions.{NoActionHandlerException, UnknownMessageException}
 
 object Game {
 
@@ -27,8 +28,8 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
 
   override def preStart(): Unit = {
     config.actions.foreach {
-      case (actionType, props) ⇒
-        actions += actionType → context.actorOf(props, actionType)
+      case (action, props) ⇒
+        actions += action → context.actorOf(props, action)
     }
 
     behavior = context.actorOf(
@@ -52,15 +53,17 @@ class Game(config: GameConfig) extends Actor with ActorLogging {
 
     case ResponseCreateResponse(playerRef: ActorRef, flow: Flow) ⇒
       playerRef ! ResponsePlay(flow)
+
+    case _ => throw UnknownMessageException()
   }
 
   protected def requestPlay(flow: Flow): Unit = {
-    val actionType = flow.requestContext.action
-    actions.get(actionType) match {
+    val action = flow.requestContext.action
+    actions.get(action) match {
       case Some(ref) ⇒
         ref ! RequestActionProcess(sender, flow)
       case None ⇒
-        log.info("No handler for action: {}", actionType)
+        throw NoActionHandlerException(action)
     }
   }
 
