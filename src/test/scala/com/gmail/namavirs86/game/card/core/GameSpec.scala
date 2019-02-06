@@ -3,11 +3,10 @@ package com.gmail.namavirs86.game.card.core
 import akka.actor.ActorSystem
 import akka.testkit.{TestKit, TestProbe}
 import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpecLike}
-import com.gmail.namavirs86.game.card.core.Definitions.{GameConfig, GamePlayResponse}
+import com.gmail.namavirs86.game.card.core.Definitions._
 import com.gmail.namavirs86.game.card.core.Game.ResponsePlay
-import com.gmail.namavirs86.game.card.core.helpers.Helpers.TestActionType
+import com.gmail.namavirs86.game.card.core.helpers.Helpers.{TestActionType, TestGameContext}
 import com.gmail.namavirs86.game.card.core.helpers._
-import spray.json.JsString
 
 class GameSpec(_system: ActorSystem)
   extends TestKit(_system)
@@ -32,12 +31,12 @@ class GameSpec(_system: ActorSystem)
   "A Game actor" should {
     "process requested action" in {
       val probe = TestProbe()
-      val game = system.actorOf(Game.props(config), "gameActor")
+      val game = system.actorOf(Game.props(config), name = "gameActor")
       val flow = Helpers.createFlow()
 
       game.tell(Game.RequestPlay(flow), probe.ref)
 
-      val response = probe.expectMsgType[ResponsePlay]
+      val response = probe.expectMsgType[ResponsePlay[TestGameContext]]
       val requestContext = response.flow.requestContext
       requestContext.requestId shouldBe 0
       requestContext.action shouldBe TestActionType.DEAL

@@ -4,12 +4,16 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 import org.scalatest.{Matchers, WordSpecLike}
 import com.gmail.namavirs86.game.card.core.Definitions._
-import com.gmail.namavirs86.game.card.core.helpers.Helpers
 import com.gmail.namavirs86.game.card.core.random.RandomCheating
 
 class ShoeManagerSpec extends WordSpecLike with Matchers {
 
-  val shoeManager = new ShoeManager(Helpers.shoeManagerSettings)
+  val shoeManagerSettings = ShoeManagerSettings(
+    deckCount = 1,
+    cutCardPosition = 40
+  )
+
+  val shoeManager = new ShoeManager(shoeManagerSettings)
 
   "Shoe Manager" should {
     "draw a card" in {

@@ -7,19 +7,19 @@ import Behavior.{RequestBehaviorProcess, ResponseBehaviorProcess}
 
 trait BehaviorMessages {
 
-  final case class RequestBehaviorProcess(playerRef: ActorRef, flow: Flow)
+  final case class RequestBehaviorProcess[C <: GameContext](playerRef: ActorRef, flow: Flow[C])
 
-  final case class ResponseBehaviorProcess(playerRef: ActorRef, flow: Flow)
+  final case class ResponseBehaviorProcess[C <: GameContext](playerRef: ActorRef, flow: Flow[C])
 
 }
 
 object Behavior extends BehaviorMessages
 
-abstract class Behavior extends Actor with ActorLogging {
+abstract class Behavior[C <: GameContext] extends Actor with ActorLogging {
   val id: String
 
   override def receive: Receive = {
-    case RequestBehaviorProcess(playerRef: ActorRef, flow: Flow) ⇒
+    case RequestBehaviorProcess(playerRef: ActorRef, flow: Flow[C]) ⇒
       sender ! ResponseBehaviorProcess(playerRef, flow.copy(
         gameContext = process(flow)
       ))
@@ -27,5 +27,5 @@ abstract class Behavior extends Actor with ActorLogging {
     case _ => throw UnknownMessageException()
   }
 
-  def process(flow: Flow): Option[GameContext]
+  def process(flow: Flow[C]): Option[GameContext]
 }

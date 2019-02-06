@@ -7,27 +7,19 @@ import BaseAction.{RequestActionProcess, ResponseActionProcess}
 
 trait BaseActionMessages {
 
-  final case class RequestActionProcess(playerRef: ActorRef, flow: Flow)
+  final case class RequestActionProcess[C <: GameContext](playerRef: ActorRef, flow: Flow[C])
 
-  final case class ResponseActionProcess(playerRef: ActorRef, flow: Flow)
+  final case class ResponseActionProcess[C <: GameContext](playerRef: ActorRef, flow: Flow[C])
 
 }
 
 object BaseAction extends BaseActionMessages
 
-trait Action {
-  val id: String
-
-  def process(flow: Flow): Option[GameContext]
-
-  def validateRequest(flow: Flow): Unit
-}
-
-abstract class BaseAction extends Actor with Action with ActorLogging {
+abstract class BaseAction[C <: GameContext] extends Actor with ActorLogging {
   val id: String
 
   override def receive: Receive = {
-    case RequestActionProcess(playerRef: ActorRef, flow: Flow) ⇒
+    case RequestActionProcess(playerRef: ActorRef, flow: Flow[C]) ⇒
       validateRequest(flow)
       sender ! ResponseActionProcess(playerRef, flow.copy(
         gameContext = process(flow)
@@ -35,4 +27,8 @@ abstract class BaseAction extends Actor with Action with ActorLogging {
 
     case _ => throw UnknownMessageException()
   }
+
+  def process(flow: Flow[C]): Option[C]
+
+  def validateRequest(flow: Flow[C]): Unit
 }

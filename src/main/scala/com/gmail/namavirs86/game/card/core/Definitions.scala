@@ -1,7 +1,6 @@
 package com.gmail.namavirs86.game.card.core
 
 import akka.actor.Props
-import Definitions.Outcome.Outcome
 import Definitions.Rank.Rank
 import Definitions.Suit.Suit
 import com.gmail.namavirs86.game.card.core.Definitions.RequestType.RequestType
@@ -13,11 +12,11 @@ import spray.json.JsValue
 object Definitions {
 
   final case class GameConfig(
-                         id: String,
-                         actions: Map[ActionType, Props],
-                         responseAdapter: Props,
-                         behavior: Props,
-                       )
+                               id: String,
+                               actions: Map[ActionType, Props],
+                               responseAdapter: Props,
+                               behavior: Props,
+                             )
 
   object RequestType {
 
@@ -34,84 +33,33 @@ object Definitions {
   type GameId = String
 
   final case class RequestContext(
-                             request: RequestType,
-                             gameId: GameId,
-                             requestId: Long,
-                             action: ActionType,
-                             bet: Option[Float],
-                           )
-
-  type Hand = List[Card]
+                                   request: RequestType,
+                                   gameId: GameId,
+                                   requestId: Long,
+                                   action: ActionType,
+                                   bet: Option[Float],
+                                 )
 
   type Shoe = List[Card]
 
-  final case class ResponseDealerContext(
-                                    hand: Hand,
-                                    value: Int,
-                                    hasBJ: Boolean,
-                                  )
+  trait GameContext {
+    val shoe: Shoe
+    val bet: Option[Float]
+    val totalWin: Float
+    val roundEnded: Boolean
+  }
 
-  final case class ResponsePlayerContext(
-                                    hand: Hand,
-                                    value: Int,
-                                    hasBJ: Boolean,
-                                  )
-  final case class GamePlayResponse(
-                             dealer: ResponseDealerContext,
-                             player: ResponsePlayerContext,
-                             outcome: Option[Outcome],
-                             bet: Option[Float],
-                             totalWin: Float,
-                             roundEnded: Boolean,
-                             )
-
-  final case class PlayerContext(
-                            hand: Hand,
-                            value: Int,
-                            hasBJ: Boolean,
-                          )
-
-  final case class DealerContext(
-                            hand: Hand,
-                            value: Int,
-                            holeCard: Option[Card],
-                            hasBJ: Boolean,
-                          )
-
-  final case class GameContext(
-                          dealer: DealerContext,
-                          player: PlayerContext,
-                          shoe: List[Card],
-                          outcome: Option[Outcome],
-                          bet: Option[Float],
-                          totalWin: Float,
-                          roundEnded: Boolean,
-                        )
-
-  final case class Flow(
-                   requestContext: RequestContext,
-                   gameContext: Option[GameContext],
-                   response: Option[JsValue],
-                   rng: Random,
-                 )
+  final case class Flow[+C <: GameContext](
+                                                 requestContext: RequestContext,
+                                                 gameContext: Option[C],
+                                                 response: Option[JsValue],
+                                                 rng: Random,
+                                               )
 
   final case class ShoeManagerSettings(
-                                  deckCount: Int,
-                                  cutCardPosition: Int,
-                                )
-
-  object Outcome {
-
-    sealed abstract class Outcome
-
-    case object DEALER extends Outcome
-
-    case object PLAYER extends Outcome
-
-    case object TIE extends Outcome
-
-    val outcomes = List(DEALER, PLAYER, TIE)
-  }
+                                        deckCount: Int,
+                                        cutCardPosition: Int,
+                                      )
 
   type ActionType = String
 
