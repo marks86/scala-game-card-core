@@ -113,6 +113,4 @@ object Definitions {
 
   final case class Card(rank: Rank, suit: Suit)
 
-  type CardValues = Map[Rank, Int]
-
 }
