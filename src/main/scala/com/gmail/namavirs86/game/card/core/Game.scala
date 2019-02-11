@@ -30,6 +30,7 @@ class Game[C <: GameContext](config: GameConfig) extends Actor with ActorLogging
   protected val behavior: ActorRef = context.actorOf(
     config.behavior, name = "behavior"
   )
+
   protected val responseAdapter: ActorRef = context.actorOf(
     config.responseAdapter, name = "responseAdapter"
   )
