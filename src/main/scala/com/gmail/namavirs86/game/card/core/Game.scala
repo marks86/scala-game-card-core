@@ -22,24 +22,17 @@ object Game {
 // @TODO: request validation in each action
 class Game[C <: GameContext](config: GameConfig) extends Actor with ActorLogging {
 
-  protected var actions = Map.empty[ActionType, ActorRef]
-  protected var behavior: ActorRef = _
-  protected var responseAdapter: ActorRef = _
-
-  override def preStart(): Unit = {
-    config.actions.foreach {
-      case (action, props) ⇒
-        actions += action → context.actorOf(props, action)
-    }
-
-    behavior = context.actorOf(
-      config.behavior, name = "behavior"
-    )
-
-    responseAdapter = context.actorOf(
-      config.responseAdapter, name = "responseAdapter"
-    )
+  protected val actions: Map[ActionType, ActorRef] = config.actions.map {
+    case (action, props) ⇒
+      action → context.actorOf(props, action)
   }
+
+  protected val behavior: ActorRef = context.actorOf(
+    config.behavior, name = "behavior"
+  )
+  protected val responseAdapter: ActorRef = context.actorOf(
+    config.responseAdapter, name = "responseAdapter"
+  )
 
   override def receive: Receive = {
     case RequestPlay(flow: Flow[C]) ⇒
